@@ -16,6 +16,7 @@ git push origin master // 푸시 진행
 
 <details>
 <summary>파일 수정</summary>
+
 - package.json
 - index.js
 -	App.js 
@@ -23,6 +24,7 @@ git push origin master // 푸시 진행
 
 <details>
 <summary>파일 삭제</summary>
+
 App.css / App.test.js / index.css / logo.svg / reportWebVitals.js / setupTest.js 
 </details>
 	
