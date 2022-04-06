@@ -1,5 +1,147 @@
 # 배종범
 ## Nwitter 2022
+>github.com/easysIT/nwiiter
+### 04.06
+
+<details>
+<summary>Router.js에 IMPORT useState</summary>
+   
+```
+import { useState } from "react";
+...
+const AppRouter = () => {
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  return ( ...
+```
+
+</details>
+
+<details>
+<summary>Router.js 코드 추가</summary>
+
+```
+<Router>
+    <Swich>
+        {isLoggedIn ? (
+            <Route exact path="/">
+                <Home />
+            </Route>
+            ) : (
+            <Route exact path="/">
+                <Auth />
+            </Route>
+        )}
+    </Swich>
+</Router>
+```
+
+- react-router-dom의 버전이 v6 이라면 Switch => Routes로 변경
+```
+react-router-dom 다운그레이드 시키기
+npm react-router-dom@5.2.0
+```
+</details>
+
+<details>
+<summary>App.js 수정하기</summary>
+
+```
+return <AppRouter />
+```
+
+</details>
+
+<details>
+<summary>App.js 수정하기 - useState 추가</summary>
+
+```
+import {useState} from "react"
+...
+const [ isLoggedIn, setIsLoggedIn ] = useState(false);  return (
+    <>
+      <AppRouter isLoggedIn={ isLoggedIn }/>
+      <footer>&copy; {new Date().getFullYear()} Nwitter</footer>
+    </>
+) 
+```
+
+</details>
+
+<details>
+<summary>Router.js 수정하기</summary>
+
+```
+삭제
+import {useState} from "react" 
+const [ isLoggedIn, setIsLoggedIn ] = useState(false);  
+
+변경
+const AppRouter = ({isLoggedIn}) ...
+return (
+) 
+```
+
+</details>
+
+<details>
+<summary>jsconfig.json 생성</summary>
+
+src
+```
+{
+    "compilerOptions": {
+        "baseUrl": "src"
+    },
+    "include": ["src"]
+}
+```
+
+</details>
+
+<details>
+<summary>firebase.js -> fbase.js 파일명 변경</summary>
+
+```
+fbase.js
+
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+...
+firebase.initializeApp(firebaseConfig);
+export const authService = firebase.auth();
+
+```
+
+</details>
+
+<details>
+<summary>Router / App / index JS파일 수정</summary>
+
+```
+index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from 'components/App';
+...
+
+App.js
+
+import AppRouter from "components/Router";
+import {useState} from "react"; 
+import {authService} from "fbase";
+...
+
+Router.js
+
+import Auth from "routes/Auth";
+import Home from "routes/Home";
+...
+
+```
+
+</details>
+
 ### 03.30
 <details>
 <summary>Firebase 프로젝트 생성 및 설정</summary>
@@ -72,9 +214,10 @@ export default 파일명
 - src/components 폴더 생성
 App.js 파일 이동
 
-- 뭐 설치
+- react-router-dom 설치
 ```
-npm ???
+Switch 사용하기위해 v5 버전 다운
+npm react-router-dom@5.2.0
 ```
 
 - components/Router.js 생성
