@@ -1,6 +1,92 @@
 # 배종범
 ## Nwitter 2022
->github.com/easysIT/nwiiter
+>github.com/easysIT/nwitter
+### 04.13
+
+<details>
+<summary>firebase 로그인 추가</summary>
+
+- 이메일 사용설정 O
+- 구글 사용설정 O, 프로젝트 지원 이메일 -> 자기 이메일 
+- Github 
+```
+1. 하단 주소 복사
+2. github 로그인 -> 우측 상단 아이콘 클릭 setting -> developer setting
+3. OAuth app -> callbackURL에 주소 복사한거 붙여넣기
+4. HomePage URL : firebase 페이지 -> http:// + 승인된 도메인 2번째 내용 복붙
+5. 생성
+6. Github 사용 설정-> Client secrets 생성 후 ID 와 password 입력 후 저장
+```
+</details>
+
+<details>
+<summary>Auth.js 수정</summary>
+   
+```
+const Auth = () => {
+    return (
+        <div>
+            <form>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <input type="submit" value="Log In" />
+            </form>
+            <div>
+                <button>Continue with Goolge</button>
+                <button>Continue with Github</button>
+            </div>
+        </div>
+    );
+};
+export default Auth
+
+```
+
+</details>
+<details>
+<summary>Auth.js 수정 2</summary>
+   
+```
+import { useState } from "react";
+
+const Auth = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [newAccount, setNewAccount] = useState(true);
+
+    const onChange = (event) => {
+        const {
+            target: {name, value},
+        } = event;
+        if ( name === "email") {
+            setEmail(value);
+        } else if ( name === "password") {
+            setPassword(value);
+        }
+    }
+    
+    const onSubmit = (event) => {
+        event.preventDefault();
+        if (newAccount) {
+            // create newAccount
+        } else {
+            // Log in
+        }
+    }
+
+    return (
+        <div>
+            <form>
+                <input type="email" name="email" placeholder="Email" required  value={ email } onChange={ onChange } />
+                <input type="password" placeholder="Password" required value={ password } onChange={ onChange } />
+                <input type="submit" value={ newAccount ? "Create Account" : "Log In" }  />
+            </form>
+            ...
+
+```
+
+</details>
+
 ### 04.06
 
 <details>
